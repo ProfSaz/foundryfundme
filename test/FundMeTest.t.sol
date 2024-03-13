@@ -6,6 +6,7 @@ import {FundMe} from "../src/Fundme.sol";
 
 contract FundMeTest is Test {
     FundMe fundMe;
+    
     function setUp() external {
         fundMe = new FundMe();
     }
@@ -24,5 +25,6 @@ contract FundMeTest is Test {
         uint version = fundMe.getVersion();
         assertEq(version, 4);
     }
+
 
 }
