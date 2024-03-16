@@ -122,7 +122,7 @@ contract FundMeTest is StdCheats, Test {
 
         //Act 
         vm.prank(fundMe.getOwner());
-        fundMe.withdraw();
+        fundMe.cheaperWithdraw();
 
         //Assert
         assertEq(address(fundMe).balance, 0);
