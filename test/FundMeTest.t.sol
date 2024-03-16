@@ -4,13 +4,20 @@ pragma solidity ^0.8.18;
 import {Test,console} from "forge-std/Test.sol";
 import {FundMe} from "../src/Fundme.sol";
 import {DeployFundMe} from "../script/DeployFundMe.s.sol";
+import {StdCheats} from "forge-std/StdCheats.sol";
 
-contract FundMeTest is Test {
-        FundMe fundMe;
+contract FundMeTest is StdCheats, Test {
+    FundMe fundMe;
+
+    address USER = makeAddr("user");
+
+    uint256 constant  SEND_VALUE = 0.01 ether;
+    uint256 constant STARTING_BALANCE = 10 ether;
 
     function setUp() external {
          DeployFundMe deployFundMe = new DeployFundMe();
         fundMe = deployFundMe.run();
+        vm.deal(USER, STARTING_BALANCE);
     }
 
     function testMinUsd() public {
@@ -28,5 +35,34 @@ contract FundMeTest is Test {
         assertEq(version, 4);
     }
 
+    // function testFundFailWithoutEnoughETH() public {
+    //     vm.expectRevert();
+    //     fundMe.fund();
+    // }
+
+    function testFundUpdateFundedDataStructure() public {
+        vm.prank(USER);
+        fundMe.fund{value: SEND_VALUE}();
+        uint256 amountFunded = fundMe.getAddressToAmountFunded(USER);
+        assertEq(amountFunded, SEND_VALUE);
+    }
+
+    function testAddFunderToArrayOfFunders() public {
+        vm.prank(USER);
+        fundMe.fund{value: SEND_VALUE}();
+
+        address funder = fundMe.getFunder(0);
+        assertEq(funder, USER);
+    }
+
+    function testOnlyOwnerCanWithdraw() public {
+        vm.prank(USER);
+        fundMe.fund{value: SEND_VALUE}();
+
+        vm.expectRevert();
+        vm.prank(USER);
+        fundMe.withdraw();
+
+    }
 
 }
