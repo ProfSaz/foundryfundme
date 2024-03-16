@@ -74,13 +74,23 @@ contract FundMeTest is StdCheats, Test {
         vm.prank(fundMe.getOwner());
         fundMe.withdraw();
 
-        //Asert
+        //Assert
 
         uint256 endingOwnerbalance = fundMe.getOwner().balance;
         uint256 endingFundMeBalance = address(fundMe).balance;
 
         assertEq(endingFundMeBalance, 0);
         assertEq(startingOwnerBalance + startingFundMeBalance, endingOwnerbalance);
+    }
+
+    function testWithdrawWithMultipleFunder() public funded {
+        //Arrange
+
+
+        //Act 
+
+
+        //Assert
     }
 
 }
