@@ -96,7 +96,7 @@ contract FundMeTest is StdCheats, Test {
 
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
-        
+
         //Act 
         vm.prank(fundMe.getOwner());
         fundMe.withdraw();
