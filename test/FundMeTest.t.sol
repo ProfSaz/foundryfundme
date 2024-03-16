@@ -40,29 +40,47 @@ contract FundMeTest is StdCheats, Test {
     //     fundMe.fund();
     // }
 
-    function testFundUpdateFundedDataStructure() public {
+    modifier funded {
         vm.prank(USER);
         fundMe.fund{value: SEND_VALUE}();
+        _;
+    }
+
+    function testFundUpdateFundedDataStructure() public funded {
         uint256 amountFunded = fundMe.getAddressToAmountFunded(USER);
         assertEq(amountFunded, SEND_VALUE);
     }
 
-    function testAddFunderToArrayOfFunders() public {
-        vm.prank(USER);
-        fundMe.fund{value: SEND_VALUE}();
+    function testAddFunderToArrayOfFunders() public funded {
 
         address funder = fundMe.getFunder(0);
         assertEq(funder, USER);
     }
 
-    function testOnlyOwnerCanWithdraw() public {
-        vm.prank(USER);
-        fundMe.fund{value: SEND_VALUE}();
 
+    function testOnlyOwnerCanWithdraw() public  funded {
         vm.expectRevert();
         vm.prank(USER);
         fundMe.withdraw();
 
+    }
+
+    function testWithdrawWithASingleFunder() public funded {
+        //Arrange
+        uint256 startingOwnerBalance = fundMe.getOwner().balance;
+        uint256 startingFundMeBalance = address(fundMe).balance;
+
+        //Act
+        vm.prank(fundMe.getOwner());
+        fundMe.withdraw();
+
+        //Asert
+
+        uint256 endingOwnerbalance = fundMe.getOwner().balance;
+        uint256 endingFundMeBalance = address(fundMe).balance;
+
+        assertEq(endingFundMeBalance, 0);
+        assertEq(startingOwnerBalance + startingFundMeBalance, endingOwnerbalance);
     }
 
 }
