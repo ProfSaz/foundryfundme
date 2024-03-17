@@ -35,10 +35,10 @@ contract FundMeTest is StdCheats, Test {
         assertEq(version, 4);
     }
 
-    // function testFundFailWithoutEnoughETH() public {
-    //     vm.expectRevert();
-    //     fundMe.fund();
-    // }
+    function testFundFailWithoutEnoughETH() public {
+        vm.expectRevert();
+        fundMe.fund();
+    }
 
     modifier funded {
         vm.prank(USER);
