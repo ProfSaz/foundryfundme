@@ -1,66 +1,32 @@
-## Foundry
+# FundMe Contract
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A sample funding contract that allows users to fund the contract based on the ETH/USD price feed. This project uses Foundry for development and testing.
 
-Foundry consists of:
+## Table of Contents
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Testing](#testing)
+4. [Environment Variables](#environment-variables)
+5. [Features](#features)
+6. [Contributing](#contributing)
+7. [License](#license)
+8. [Contact](#contact)
 
-## Documentation
+## Installation
 
-https://book.getfoundry.sh/
+To get started with this project, clone the repository and install the dependencies.
 
-## Usage
+```bash
+# Clone the repository
+git clone https://github.com/your-username/your-project-name.git
 
-### Build
+# Navigate to the project directory
+cd your-project-name
 
-```shell
-$ forge build
-```
+# Install Foundry
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
 
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+# Install dependencies using foundry
+forge install
