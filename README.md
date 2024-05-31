@@ -19,10 +19,10 @@ To get started with this project, clone the repository and install the dependenc
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/your-project-name.git
+git clone https://github.com/ProfSaz/foundryfundme.git
 
 # Navigate to the project directory
-cd your-project-name
+cd foundryfundme
 
 # Install Foundry
 curl -L https://foundry.paradigm.xyz | bash
