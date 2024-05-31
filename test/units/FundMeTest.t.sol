@@ -106,7 +106,7 @@ contract FundMeTest is StdCheats, Test {
         assertEq(startingOwnerBalance + startingFundMeBalance, fundMe.getOwner().balance);
     }
 
-        function testWithdrawWithMultipleFunderCheaper() public funded {
+    function testWithdrawWithMultipleFunderCheaper() public funded {
 
         uint160 totalFunders = 10;
         uint160 startingFunders = 1;
