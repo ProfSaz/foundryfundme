@@ -5,11 +5,8 @@ import {Script} from "forge-std/Script.sol";
 import {FundMe} from "../src/Fundme.sol";
 import {HelperConfig} from "./HelperConfig.s.sol";
 
-
 contract DeployFundMe is Script {
-
-    function run() public returns(FundMe) {
-        
+    function run() public returns (FundMe) {
         HelperConfig helperConfig = new HelperConfig();
 
         (address ethUsdPrice) = helperConfig.activeNetworkConfig();
