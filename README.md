@@ -8,12 +8,16 @@ A sample funding contract that allows users to fund the contract based on the ET
 2. [Usage](#usage)
     - [Deploy](#deploy)
     - [Test](#test)
-    - [Test-Coverage](#test-coverage)
+    - [Test Coverage](#test-coverage)
 3. [Environment Variables](#environment-variables)
 4. [Features](#features)
-6. [Contributing](#contributing)
-7. [License](#license)
-8. [Contact](#contact)
+5. [Deploying to a testnet or mainnet](#deploying-to-a-testnet-or-mainnet)
+6. [Interactions](#interactions)
+    - [Funding](#funding)
+    - [Withdraw](#withdraw)
+7. [Estimate Gas](#estimate-gas)
+8. [Formatting](#formatting)
+9. [Contact](#contact)
 
 ## Installation
 
@@ -115,4 +119,55 @@ Head over to [faucets.chain.link](https://faucets.chain.link/) and get some test
 forge script script/DeployFundMe.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY
 
 ```
+
+## Interactions
+
+After deploying to a testnet or local net, you can interact with the contract either by using `cast` or by using the the scripts 
+
+### Funding
+``` bash
+cast send <FUNDME_CONTRACT_ADDRESS> "fund()" --value 0.01ether --private-key <PRIVATE_KEY>
+```
+
+or
+```bash 
+forge script script/Interactions.s.sol:FundFundMe --rpc-url sepolia  --private-key $PRIVATE_KEY  --broadcast
+forge script script/Interactions.s.sol:WithdrawFundMe --rpc-url sepolia  --private-key $PRIVATE_KEY  --broadcast
+```
+
+### Withdraw
+
+```bash 
+cast send <FUNDME_CONTRACT_ADDRESS> "withdraw()"  --private-key <PRIVATE_KEY>
+```
+
+## Estimate gas
+
+You can estimate how much gas things cost by running:
+
+```bash
+forge snapshot
+```
+
+And you'll see an output file called `.gas-snapshot`
+
+
+## Formatting
+
+
+To run code formatting:
+```bash
+forge fmt
+```
+
+## Contact
+
+If you appreciated this, feel free to follow me 
+
+[![ProfSaz Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/Prof_Saz)
+[![ProfSaz Linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshua-Osemwegie-2a9080191)
+
+
+
+
 
